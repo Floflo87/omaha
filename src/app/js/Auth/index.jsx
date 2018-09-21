@@ -1,27 +1,27 @@
-import React, { Component } from 'react'
-import { Route, Switch } from 'react-router-dom'
-import { withRouter } from 'react-router'
+import React, { Component } from 'react';
+import { Route, Switch } from 'react-router-dom';
+import { withRouter } from 'react-router';
 
-import api from '../utils/api'
+import api from '../utils/api';
 
-import SignUp from './SignUp'
-import Logout from './Logout'
-import SignIn from './SignIn'
-import NotFound from '../NotFound'
+import SignUp from './SignUp';
+import Logout from './Logout';
+import SignIn from './SignIn';
+import NotFound from '../NotFound';
 
 class Auth extends Component {
     constructor(props) {
-        super(props)
+        super(props);
 
         this.state = {
             email: '',
             password: '',
             picture: undefined,
-            error: '',
-        }
+            error: ''
+        };
 
-        this._handleInputChange = this._handleInputChange.bind(this)
-        this._sign = this._sign.bind(this)
+        this._handleInputChange = this._handleInputChange.bind(this);
+        this._sign = this._sign.bind(this);
     }
 
     render() {
@@ -60,21 +60,21 @@ class Auth extends Component {
                 />
                 <Route component={NotFound} />
             </Switch>
-        )
+        );
     }
 
     _handleInputChange(key, newValue) {
         this.setState({
-            [key]: newValue,
-        })
+            [key]: newValue
+        });
     }
 
     _sign(type) {
         this.setState({
-            error: '',
-        })
+            error: ''
+        });
 
-        const pictureDeclaration = type === 'up' && { picture: this.state.picture }
+        const pictureDeclaration = type === 'up' && { picture: this.state.picture };
 
         api.post(
             `/api/auth/sign-${type}`,
@@ -82,16 +82,40 @@ class Auth extends Component {
             pictureDeclaration
         )
             .then(data => {
-                localStorage.setItem('identity', data.token)
-                this.props.setUser()
-                this.props.history.push('/')
+                localStorage.setItem('identity', data.token);
+                this.props.setUser();
+                this.props.history.push('/');
             })
             .catch(err => {
                 this.setState({
-                    error: err.description,
-                })
-            })
+                    error: err.description
+                });
+            });
+
+        // api.post(
+        //     `/api/index/profile/edit`,
+        //     {
+        //         email: this.state.email,
+        //         password: this.state.password,
+        //         name: this.state.name,
+        //         age: this.state.age,
+        //         gender: this.state.gender,
+        //         description: this.state.description,
+        //         preferences: this.state.preferences
+        //     },
+        //     pictureDeclaration
+        // )
+        //     .then(data => {
+        //         localStorage.setItem('identity', data.token);
+        //         this.props.setUser();
+        //         this.props.history.push('/');
+        //     })
+        //     .catch(err => {
+        //         this.setState({
+        //             error: err.description
+        //         });
+        //     });
     }
 }
 
-export default withRouter(Auth)
+export default withRouter(Auth);
