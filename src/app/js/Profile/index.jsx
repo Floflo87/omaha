@@ -1,26 +1,27 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
-import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+// import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 import api from '../utils/api';
+import Display from './Display';
 class Profile extends Component {
     constructor(props) {
         super(props);
-
         this.state = {
+            profilePicture: '',
             age: '',
-            profession: '',
-            favoriteFood: '',
-            allergies: {
-                gluten: false,
-                lactose: false,
-                peanuts: false
+            description: '',
+            gender: '',
+            name: '',
+            preferences: {
+                women: false,
+                men: false,
+                both: false
             },
-            language: '', // english, german, japanese, italian, russian, polish, persian, french, norwegian
-            eyeColor: '' // green, blue, brown, red
+            city: ''
         };
 
         this._inputChangeHandler = this._inputChangeHandler.bind(this);
-        this._allergyChangeHandler = this._allergyChangeHandler.bind(this);
+        this._preferencesChangeHandler = this._preferencesChangeHandler.bind(this);
         this._submitData = this._submitData.bind(this);
     }
 
@@ -35,7 +36,7 @@ class Profile extends Component {
                 <br />
                 {this.props.user.email}
                 <br />
-                <h1>GIVE ME MORE INFORMATION, SO I CAN SELL IT:</h1>
+                <h1>Show me your best self:</h1>
                 <input
                     type="number"
                     value={this.state.age}
@@ -45,103 +46,63 @@ class Profile extends Component {
                 <br />
                 <input
                     type="text"
-                    value={this.state.profession}
-                    placeholder="profession"
-                    onChange={evt => this._inputChangeHandler('profession', evt.target.value)}
+                    value={this.state.gender}
+                    placeholder="gender"
+                    onChange={evt => this._inputChangeHandler('gender', evt.target.value)}
                 />
                 <br />
                 <input
                     type="text"
-                    value={this.state.favoriteFood}
-                    placeholder="favorite food"
-                    onChange={evt => this._inputChangeHandler('favoriteFood', evt.target.value)}
+                    value={this.state.name}
+                    placeholder="name"
+                    onChange={evt => this._inputChangeHandler('name', evt.target.value)}
                 />
                 <br />
-                <label htmlFor="">
-                    <input
-                        type="checkbox"
-                        value={this.state.allergies.gluten}
-                        onChange={evt => this._allergyChangeHandler(`gluten`)}
-                    />
-                    Gluten
-                </label>
-                <br />
-                <label htmlFor="">
-                    <input
-                        type="checkbox"
-                        value={this.state.allergies.lactose}
-                        onChange={evt => this._allergyChangeHandler(`lactose`)}
-                    />
-                    Lactose
-                </label>
-                <br />
-                <label htmlFor="">
-                    <input
-                        type="checkbox"
-                        value={this.state.allergies.peanuts}
-                        onChange={evt => this._allergyChangeHandler(`peanuts`)}
-                    />
-                    Peanuts
-                </label>
-                <br />
-                <select
-                    value={this.state.language}
-                    onChange={evt => this._inputChangeHandler('language', evt.target.value)}
-                >
-                    <option disabled key="n" value="">
-                        Please select your language
-                    </option>
-                    <option value="english">English</option>
-                    <option value="german">German</option>
-                    <option value="japanese">Japanese</option>
-                    <option value="italian">Italian</option>
-                    <option value="russian">Russian</option>
-                    <option value="polish">Polish</option>
-                    <option value="french">French</option>
-                    <option value="persian">Persian</option>
-                    <option value="romanian">Romanian</option>
-                    <option value="norwegian">Norwegian</option>
-                </select>
-                <br />
+                <h2>Interested In</h2>
                 <label>
                     <input
                         type="radio"
-                        value="green"
-                        checked={this.state.eyeColor === 'green'}
-                        onChange={evt => this._inputChangeHandler('eyeColor', evt.target.value)}
+                        value="women"
+                        checked={this.state.preferences === 'women'}
+                        onChange={evt => this._inputChangeHandler('preferences', evt.target.value)}
                     />
-                    Green
+                    Women
                 </label>
                 <br />
                 <label>
                     <input
                         type="radio"
-                        value="blue"
-                        checked={this.state.eyeColor === 'blue'}
-                        onChange={evt => this._inputChangeHandler('eyeColor', evt.target.value)}
+                        value="men"
+                        checked={this.state.preferences === 'men'}
+                        onChange={evt => this._inputChangeHandler('preferences', evt.target.value)}
                     />
-                    Blue
+                    Men
                 </label>
                 <br />
                 <label>
                     <input
                         type="radio"
-                        value="brown"
-                        checked={this.state.eyeColor === 'brown'}
-                        onChange={evt => this._inputChangeHandler('eyeColor', evt.target.value)}
+                        value="both"
+                        checked={this.state.preferences === 'both'}
+                        onChange={evt => this._inputChangeHandler('preferences', evt.target.value)}
                     />
-                    brown
+                    Both
                 </label>
                 <br />
-                <label>
-                    <input
-                        type="radio"
-                        value="red"
-                        checked={this.state.eyeColor === 'red'}
-                        onChange={evt => this._inputChangeHandler('eyeColor', evt.target.value)}
-                    />
-                    red
-                </label>
+                <h2>About Yourself</h2>
+                <textarea
+                    type="text"
+                    value={this.state.description}
+                    placeholder="About Yourself"
+                    onChange={evt => this._inputChangeHandler('description', evt.target.value)}
+                />
+                <br />
+                <input
+                    type="text"
+                    value={this.state.city}
+                    placeholder="city"
+                    onChange={evt => this._inputChangeHandler('city', evt.target.value)}
+                />
                 <button onClick={this._submitData}>SUBMIT</button>
             </div>
         );
@@ -151,9 +112,13 @@ class Profile extends Component {
         e.preventDefault();
         console.log('submitting Data', this.state);
         api.put('/api/profile', {
-            profession: this.state.profession,
-            favoriteFood: this.state.favoriteFood,
-            age: this.state.age
+            profilePicture: this.state.profilePicture,
+            age: this.state.age,
+            description: this.state.description,
+            gender: this.state.gender,
+            name: this.state.name,
+            preferences: this.state.preferences,
+            city: this.state.city
         })
             .then(result => {
                 console.log(result);
@@ -167,90 +132,10 @@ class Profile extends Component {
         });
     }
 
-    _allergyChangeHandler(key) {
-        const newAllergies = { ...this.state.allergies };
-        newAllergies[key] = !newAllergies[key];
-        this.setState({ allergies: newAllergies });
+    _preferencesChangeHandler(key) {
+        const newPreferences = { ...this.state.preferences };
+        newPreferences[key] = !newPreferences[key];
+        this.setState({ preferences: newPreferences });
     }
 }
-
-// class Profile extends Component {
-//     render() {
-//         if (!this.props.user) return <Redirect to="/auth/sign-in" />; // this is actually the protection
-//         console.log(this.props);
-//         return (
-//             <div className="container">
-//                 <img src={this.props.user.profilePicture} alt="" />
-//                 <br />
-//                 {this.props.user._id}
-//                 <br />
-//                 {this.props.user.email}
-//                 <br />
-//                 <Form>
-//                     <FormGroup>
-//                         <Label for="exampleEmail">Name</Label>
-//                         <Input type="name" name="name" id="name" placeholder="your name" />
-//                     </FormGroup>
-//                     <FormGroup tag="fieldset">
-//                         <legend>Preferences</legend>
-//                         <FormGroup check>
-//                             <Label check>
-//                                 <Input type="radio" name="radio1" /> Women
-//                             </Label>
-//                         </FormGroup>
-//                         <FormGroup check>
-//                             <Label check>
-//                                 <Input type="radio" name="radio1" /> Men
-//                             </Label>
-//                         </FormGroup>
-//                         <FormGroup check disabled>
-//                             <Label check>
-//                                 <Input type="radio" name="radio1" disabled /> Both
-//                             </Label>
-//                         </FormGroup>
-//                     </FormGroup>
-//                     <FormGroup tag="fieldset">
-//                         <legend>Gender</legend>
-//                         <FormGroup check>
-//                             <Label check>
-//                                 <Input type="radio" name="radio2" /> Woman
-//                             </Label>
-//                         </FormGroup>
-//                         <FormGroup check>
-//                             <Label check>
-//                                 <Input type="radio" name="radio1" /> Man
-//                             </Label>
-//                         </FormGroup>
-//                     </FormGroup>
-//                     <FormGroup>
-//                         <Label for="exampleText">About Yourself</Label>
-//                         <Input type="textarea" name="text" id="exampleText" />
-//                     </FormGroup>
-//                     <FormGroup>
-//                         <Label for="exampleFile">File</Label>
-//                         <Input type="file" name="file" id="exampleFile" />
-//                         <FormText color="muted">
-//                             Upload The Best Pictures Of You, Make It Count....The One Is Waiting.
-//                         </FormText>
-//                     </FormGroup>
-//                 </Form>
-//                 <form>
-//                     <div class="form-group">
-//                         <label for="formControlRange">Age</label>
-//                         <input type="range" class="form-control-range" id="formControlRange" />
-//                     </div>
-//                 </form>
-//                 <form>
-//                     <div class="form-group">
-//                         <label for="formControlRange">Distance</label>
-//                         <input type="range" class="form-control-range" id="formControlRange" />
-//                     </div>
-//                 </form>
-//                 {this.props.user.name}
-//                 <Button color="danger">Save Changes</Button>
-//             </div>
-//         );
-//     }
-// }
-
 export default Profile;

@@ -23,3 +23,22 @@ img {
     width: 100px;
     height: 100px;
 }
+
+.card {
+    width: 30vw;
+}
+
+.card img {
+    height: 200px;
+}
+
+.card button img {
+    width: 30px;
+    height: 30px;
+}
+
+#user-cards {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}

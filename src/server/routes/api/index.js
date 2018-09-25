@@ -4,6 +4,7 @@ const User = require('../../models/User');
 const authRoutes = require('./auth');
 const { userMiddleware, checkLoggedIn } = require('../../utils/middleware');
 const { createUserToken } = require('../../utils/token');
+const Match = require('../../models/Match');
 
 router.use(userMiddleware);
 
@@ -30,10 +31,10 @@ router.get('/profile', checkLoggedIn, (req, res) => {
 // });
 
 router.put('/profile', checkLoggedIn, (req, res) => {
-    const { name, profilePicture, age, gender, description, preferences } = req.body;
+    const { name, age, gender, description, preferences, city } = req.body;
     User.findByIdAndUpdate(
         req.user._id,
-        { name, profilePicture, age, gender, description, preferences },
+        { name, age, gender, description, preferences, city },
         { new: true }
     )
         .then(user => {
@@ -42,6 +43,33 @@ router.put('/profile', checkLoggedIn, (req, res) => {
         })
         .catch(error => {
             console.log(error);
+        });
+});
+
+router.get('/match', (req, res) => {
+    User.find({}).then(result => {
+        res.send(result);
+    });
+});
+
+router.post('/match', (req, res) => {
+    Match.findOne({
+        from: req.body.otherUser,
+        to: req.user._id
+    })
+        .then(existingMatch => {
+            if (existingMatch) {
+                existingMatch.confirmed = true;
+                return existingMatch.save();
+            } else {
+                return new Match({
+                    from: req.user._id,
+                    to: req.body.otherUser
+                }).save();
+            }
+        })
+        .then(match => {
+            res.send(match);
         });
 });
 

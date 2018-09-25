@@ -1,5 +1,5 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Navigation = props => {
     return (
@@ -17,6 +17,12 @@ const Navigation = props => {
                             </Link>
                         </span>
                     )}
+                </div>
+                <div>
+                    {' '}
+                    <Link className="link nav-link" to="/match">
+                        Matches
+                    </Link>
                 </div>
                 <div>
                     {props.user ? (
@@ -37,7 +43,7 @@ const Navigation = props => {
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default Navigation
+export default Navigation;
