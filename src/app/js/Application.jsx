@@ -11,7 +11,7 @@ import NotFound from './NotFound';
 import api from './utils/api';
 import Match from './match';
 import ProfileDisplay from './Profile/Display';
-// import Chat from './Chat';
+import Chat from './Chat';
 
 class Application extends React.Component {
     constructor(props) {
@@ -43,7 +43,7 @@ class Application extends React.Component {
                         />
                         <Route path="/match" component={Match} />
                         <Route path="/profile/hello" component={ProfileDisplay} />
-                        {/* <Route path="/chat" component={Chat} /> */}
+                        <Route path="/chat" component={Chat} />
                         <Route component={NotFound} />
                     </Switch>
                 </div>
