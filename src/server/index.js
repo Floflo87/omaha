@@ -22,6 +22,9 @@ mongoose.connect(
 
 const server = express();
 
+var httpServer = require('http').Server(server);
+var io = require('socket.io')(httpServer);
+
 server.use(helmet());
 server.use(morgan('dev'));
 server.use(compression());
@@ -43,8 +46,27 @@ mongoose.connection.on('connected', () => {
     const dir = fs.readdirSync(path.join(__dirname, './models'));
     dir.forEach(model => require(`./models/${model}`));
 
-    server.listen(config.PORT, () => {
-        console.log(chalk.blue.bold('Server is up and running: http://localhost:' + config.PORT));
+    // server.listen(config.PORT, () => {
+    //     console.log(chalk.blue.bold('Server is up and running: http://localhost:' + config.PORT));
+    // });
+});
+
+httpServer.listen(3002, function() {
+    console.log('server is running on port 3002');
+});
+// WARNING: app.listen(80) will NOT work here!
+
+server.get('/', function(req, res) {
+    res.sendFile(__dirname + '/index.html');
+});
+
+io.on('connection', function(socket) {
+    console.log('Connected User');
+
+    socket.on('SEND_MESSAGE', data => {
+        console.log('test');
+        console.log(data);
+        io.emit('RECEIVE_MESSAGE', data);
     });
 });
 

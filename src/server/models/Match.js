@@ -17,6 +17,9 @@ const matchSchema = new Schema({
     confirmed: {
         type: Boolean,
         default: false
+    },
+    channel: {
+        type: String
     }
 });
 

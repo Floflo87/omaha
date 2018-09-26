@@ -1,10 +1,11 @@
 import React from 'react';
 import { Card, CardBody, CardTitle, CardImg, CardSubtitle, CardText, Button } from 'reactstrap';
+import { Link, withRouter } from 'react-router-dom';
 import api from './utils/api.js';
 
 class Match extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             items: [],
             term: '',
@@ -52,6 +53,20 @@ class Match extends React.Component {
                 isLoaded: true
             });
         });
+        this.intervalId = setInterval(otherUserId => {
+            api.get('/api/match/existing').then(match => {
+                console.log(match);
+                if (match.length > 0) {
+                    console.log('We are the best');
+                    this.props.history.push('/chat/' + match[0].channel);
+                } else {
+                    console.log('Better luck next time sucker');
+                }
+            });
+        }, 2000);
+    }
+    componentWillUnmount() {
+        clearInterval(this.intervalId);
     }
     doMatch(otherUserId) {
         api.post('api/match', {
@@ -59,7 +74,7 @@ class Match extends React.Component {
         }).then(match => {
             if (match.confirmed) {
                 console.log('We are the best');
-                prompt('COngrats you have a match');
+                this.props.history.push('/chat/' + match.channel);
             } else {
                 console.log('Better luck next time sucker');
             }
@@ -101,7 +116,7 @@ class Match extends React.Component {
                                         <CardText>{item.age}</CardText>
                                         <Button onClick={() => this.doMatch(item._id)}>
                                             THE ONE
-                                            <img src="../../server/public/img/kisspng-baby-shower-party-infant-gender-reveal-feestversie-hand-painted-flower-pattern-watercolor-heart-trans-5b9a06a41a8731.4388879515368209001087.png" />
+                                            <img src="../../server/public/img/TheOne_Heart.png" />
                                         </Button>
                                     </CardBody>
                                 </Card>
@@ -113,4 +128,4 @@ class Match extends React.Component {
     }
 }
 
-export default Match;
+export default withRouter(Match);

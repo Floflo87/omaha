@@ -10,13 +10,7 @@ class Profile extends Component {
             profilePicture: '',
             age: '',
             description: '',
-            gender: '',
             name: '',
-            preferences: {
-                women: false,
-                men: false,
-                both: false
-            },
             city: ''
         };
 
@@ -31,12 +25,19 @@ class Profile extends Component {
         return (
             <div className="container">
                 <img src={this.props.user.profilePicture} height="200px" />
+
+                {/* {this.props.user._id} */}
+
+                {/* {this.props.user.email} */}
                 <br />
-                {this.props.user._id}
+                <h1>Some Information:</h1>
+                <input
+                    type="text"
+                    value={this.state.name}
+                    placeholder="name"
+                    onChange={evt => this._inputChangeHandler('name', evt.target.value)}
+                />
                 <br />
-                {this.props.user.email}
-                <br />
-                <h1>Show me your best self:</h1>
                 <input
                     type="number"
                     value={this.state.age}
@@ -46,20 +47,20 @@ class Profile extends Component {
                 <br />
                 <input
                     type="text"
+                    value={this.state.city}
+                    placeholder="city"
+                    onChange={evt => this._inputChangeHandler('city', evt.target.value)}
+                />
+                {/* <input
+                    type="text"
                     value={this.state.gender}
                     placeholder="gender"
                     onChange={evt => this._inputChangeHandler('gender', evt.target.value)}
-                />
-                <br />
-                <input
-                    type="text"
-                    value={this.state.name}
-                    placeholder="name"
-                    onChange={evt => this._inputChangeHandler('name', evt.target.value)}
-                />
-                <br />
-                <h2>Interested In</h2>
-                <label>
+                /> */}
+                {/* <br /> */}
+                {/* <br />
+                <h2>Interested In</h2> */}
+                {/* <label>
                     <input
                         type="radio"
                         value="women"
@@ -67,8 +68,8 @@ class Profile extends Component {
                         onChange={evt => this._inputChangeHandler('preferences', evt.target.value)}
                     />
                     Women
-                </label>
-                <br />
+                </label> */}
+                {/* <br />
                 <label>
                     <input
                         type="radio"
@@ -88,8 +89,9 @@ class Profile extends Component {
                     />
                     Both
                 </label>
+                <br /> */}
                 <br />
-                <h2>About Yourself</h2>
+                <h2>Keep It Short And Real</h2>
                 <textarea
                     type="text"
                     value={this.state.description}
@@ -97,13 +99,7 @@ class Profile extends Component {
                     onChange={evt => this._inputChangeHandler('description', evt.target.value)}
                 />
                 <br />
-                <input
-                    type="text"
-                    value={this.state.city}
-                    placeholder="city"
-                    onChange={evt => this._inputChangeHandler('city', evt.target.value)}
-                />
-                <button onClick={this._submitData}>SUBMIT</button>
+                <button onClick={this._submitData}>Up To The Cloud</button>
             </div>
         );
     }
@@ -115,9 +111,7 @@ class Profile extends Component {
             profilePicture: this.state.profilePicture,
             age: this.state.age,
             description: this.state.description,
-            gender: this.state.gender,
             name: this.state.name,
-            preferences: this.state.preferences,
             city: this.state.city
         })
             .then(result => {

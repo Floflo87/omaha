@@ -3,19 +3,18 @@ import { Link } from 'react-router-dom';
 
 const Navigation = props => {
     return (
-        <div className="navigation">
-            <div className="container nav-content">
+        <div id="nav" className="navigation">
+            <div id="navlinks" className="container nav-content">
                 <div>
                     <Link className="link nav-link" to="/">
                         Home
                     </Link>
+                </div>
+                <div>
                     {props.user && (
-                        <span>
-                            &nbsp; &nbsp; &nbsp;
-                            <Link className="link nav-link" to="/profile">
-                                Profile
-                            </Link>
-                        </span>
+                        <Link className="link nav-link" to="/profile">
+                            Profile
+                        </Link>
                     )}
                 </div>
                 <div>

@@ -5,6 +5,7 @@ class SignUp extends React.Component {
     componentDidMount() {
         this.props.handleInputChange('email', '');
         this.props.handleInputChange('password', '');
+        // this.props.handleInputChange('profilePicture', '');
     }
 
     render() {
@@ -46,7 +47,7 @@ class SignUp extends React.Component {
                 <p>{this.props.error}</p>
                 <div className="separator" />
                 <Link className="link" to="/auth/sign-in">
-                    Do you have an account already? Sign in instead!
+                    Already One Of Us? Sign In You Must!
                 </Link>
             </div>
         );

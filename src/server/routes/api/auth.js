@@ -8,9 +8,11 @@ const upload = require('../../utils/upload');
 const { createUserToken } = require('../../utils/token');
 
 router.post('/sign-up', (req, res) => {
-    const { email, password } = req.body;
+    const { email, password, profilePicture } = req.body;
 
-    if (!email || !password) res.status(400).send({ error: 'Missing Credentials.', body: req.body });
+    if (!email || !password)
+        //missing || !profilePicture
+        res.status(400).send({ error: 'Missing Credentials.', body: req.body });
 
     User.findOne({ email })
         .then(existingUser => {

@@ -46,13 +46,28 @@ router.put('/profile', checkLoggedIn, (req, res) => {
         });
 });
 
-router.get('/match', (req, res) => {
+router.get('/match', checkLoggedIn, (req, res) => {
     User.find({}).then(result => {
         res.send(result);
     });
 });
 
-router.post('/match', (req, res) => {
+router.get('/match/existing', checkLoggedIn, (req, res) => {
+    Match.find({ from: req.user._id, confirmed: true }).then(existingMatch => {
+        res.send(existingMatch);
+    });
+});
+
+router.get('/match/delete', checkLoggedIn, (req, res) => {
+    Match.findOneAndRemove({
+        $and: [{ $or: [{ from: req.user._id }, { to: req.user._id }] }],
+        confirmed: true
+    }).then(() => {
+        res.send({ success: true });
+    });
+});
+
+router.post('/match', checkLoggedIn, (req, res) => {
     Match.findOne({
         from: req.body.otherUser,
         to: req.user._id
@@ -60,6 +75,9 @@ router.post('/match', (req, res) => {
         .then(existingMatch => {
             if (existingMatch) {
                 existingMatch.confirmed = true;
+                existingMatch.channel = Math.random()
+                    .toString(36)
+                    .substring(2, 12);
                 return existingMatch.save();
             } else {
                 return new Match({

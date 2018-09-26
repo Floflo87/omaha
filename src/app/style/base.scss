@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
 
 * {
     box-sizing: border-box;
@@ -6,9 +6,12 @@
 
 body {
     margin: 0;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Open Sans', cursive;
     font-size: 16px;
-    color: $text-color;
+    color: white;
+    background-image: url('../../server/public/img/theOne.jpeg');
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .container {
@@ -17,6 +20,8 @@ body {
     @media (max-width: 980px) {
         padding: 25px 10px;
     }
+    font-family: 'Tangerine';
+    color: white;
 }
 
 img {
@@ -41,4 +46,14 @@ img {
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
+}
+
+#nav {
+    background-color: #4f000b;
+}
+
+#navlinks {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: left;
 }
