@@ -139,22 +139,6 @@ class Chat extends React.Component {
                         </div>
                     </div>
                 </div>
-                <div className="container text-dark">
-                    <div className="row">
-                        <div className="col-4">
-                            <div className="progress" style={{ width: '25vw' }}>
-                                <div
-                                    className="progress-bar"
-                                    role="progressbar"
-                                    style={{ width: '25%', backgroundColor: '#4F000B' }}
-                                    aria-valuenow="1"
-                                    aria-valuemin="0"
-                                    aria-valuemax="100"
-                                />
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         );
     }

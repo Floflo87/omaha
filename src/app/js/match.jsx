@@ -88,20 +88,22 @@ class Match extends React.Component {
         } else {
             return (
                 <div>
-                    <form>
-                        //cityquery
-                        <input type="text" name="namequery" onChange={this.namehandler} />
-                    </form>
-                    <form>
-                        //agequery
-                        <input type="number" name="agequery" onChange={this.searchHandler} />
-                    </form>
+                    <div className="Querys">
+                        <form>
+                            <h1>City</h1>
+                            <input type="text" name="namequery" onChange={this.namehandler} />
+                        </form>
+                        <form>
+                            <h1>Age</h1>
+                            <input type="number" name="agequery" onChange={this.searchHandler} />
+                        </form>
+                    </div>
                     <div id="user-cards">
                         {items
                             .filter(this.searchingFor(this.state.term))
                             .filter(this.searchingForr(this.state.newterm))
                             .map(item => (
-                                <Card key={item._id}>
+                                <Card id="maincard" key={item._id}>
                                     <CardImg
                                         top
                                         width="100%"
@@ -114,10 +116,7 @@ class Match extends React.Component {
                                         <CardText>{item.description}</CardText>
                                         <CardText>{item.city}</CardText>
                                         <CardText>{item.age}</CardText>
-                                        <Button onClick={() => this.doMatch(item._id)}>
-                                            THE ONE
-                                            <img src="../../server/public/img/TheOne_Heart.png" />
-                                        </Button>
+                                        <Button onClick={() => this.doMatch(item._id)}>THE ONE</Button>
                                     </CardBody>
                                 </Card>
                             ))}

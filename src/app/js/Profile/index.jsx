@@ -32,6 +32,7 @@ class Profile extends Component {
                 <br />
                 <h1>Some Information:</h1>
                 <input
+                    className="input"
                     type="text"
                     value={this.state.name}
                     placeholder="name"
@@ -39,6 +40,7 @@ class Profile extends Component {
                 />
                 <br />
                 <input
+                    className="input"
                     type="number"
                     value={this.state.age}
                     placeholder="age"
@@ -46,6 +48,7 @@ class Profile extends Component {
                 />
                 <br />
                 <input
+                    className="input"
                     type="text"
                     value={this.state.city}
                     placeholder="city"
@@ -93,13 +96,20 @@ class Profile extends Component {
                 <br />
                 <h2>Keep It Short And Real</h2>
                 <textarea
+                    className="input"
                     type="text"
                     value={this.state.description}
                     placeholder="About Yourself"
                     onChange={evt => this._inputChangeHandler('description', evt.target.value)}
                 />
                 <br />
-                <button onClick={this._submitData}>Up To The Cloud</button>
+                <button
+                    style={{ backgroundColor: '#4f000b' }}
+                    className="btn btn-primary"
+                    onClick={this._submitData}
+                >
+                    Up To The Cloud
+                </button>
             </div>
         );
     }

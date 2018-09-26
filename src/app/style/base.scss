@@ -9,7 +9,7 @@ body {
     font-family: 'Open Sans', cursive;
     font-size: 16px;
     color: white;
-    background-image: url('../../server/public/img/theOne.jpeg');
+    background-image: url('../../server/public/img/theOne_new.png');
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -21,7 +21,7 @@ body {
         padding: 25px 10px;
     }
     font-family: 'Tangerine';
-    color: white;
+    color: #4f000b;
 }
 
 img {
@@ -30,7 +30,17 @@ img {
 }
 
 .card {
-    width: 30vw;
+    width: 22vw;
+    margin-top: 2%;
+}
+
+#maincard {
+    border: 0px;
+    box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+}
+
+.card-body {
+    background-color: #af8b90;
 }
 
 .card img {
@@ -40,6 +50,10 @@ img {
 .card button img {
     width: 30px;
     height: 30px;
+}
+
+.card button {
+    background-color: #4f000b;
 }
 
 #user-cards {
@@ -56,4 +70,22 @@ img {
     display: flex;
     flex-wrap: nowrap;
     justify-content: left;
+}
+
+.Querys {
+    display: flex;
+    justify-content: space-around;
+}
+
+.Querys form {
+    display: flex;
+    justify-content: space-around;
+}
+.Querys form h1 {
+    margin: 2%;
+}
+
+.Querys form input {
+    margin: 5%;
+    border-radius: 15px;
 }

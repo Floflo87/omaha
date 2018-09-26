@@ -36,17 +36,24 @@ class SignUp extends React.Component {
                     onChange={evt => this.props.handleInputChange('picture', evt.target.files[0])}
                     className="input"
                     placeholder="Profile Picture"
+                    style={{
+                        backgroundColor: '#4f000b'
+                    }}
                 />
                 <br />
                 <br />
-                <button className="button" onClick={() => this.props.sign('up')}>
+                <button
+                    style={{ backgroundColor: '#4f000b' }}
+                    className="button"
+                    onClick={() => this.props.sign('up')}
+                >
                     Sign Up
                 </button>
                 <br />
                 <br />
                 <p>{this.props.error}</p>
                 <div className="separator" />
-                <Link className="link" to="/auth/sign-in">
+                <Link style={{ color: '#4f000b' }} className="link" to="/auth/sign-in">
                     Already One Of Us? Sign In You Must!
                 </Link>
             </div>
