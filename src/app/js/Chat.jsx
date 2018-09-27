@@ -38,7 +38,6 @@ class Chat extends React.Component {
             });
         // setInterval(() => {
         //     api.get('/api/match/existing').then(match => {
-        //         console.log('asdasdasd', match);
         //         if (match) {
         //             console.log('We are the best');
         //         } else {
@@ -91,51 +90,71 @@ class Chat extends React.Component {
         return (
             <div className="big-wrapper">
                 <div className="container text-dark">
-                    <div className="row">
-                        <div className="col-4">
-                            <div className="card">
-                                <div className="card-body">
-                                    <div className="card-title text-dark">
-                                        <strong>Love Knows NO Boundaries</strong>
-                                    </div>
-                                    <hr />
-                                    <div className="messages">
-                                        {this.state.messages.map(message => {
-                                            return (
-                                                <div>
-                                                    {message.author}: {message.message}
-                                                </div>
-                                            );
-                                        })}
-                                    </div>
-                                </div>
-                                <div className="card-footer">
-                                    <input
-                                        type="text"
-                                        placeholder="Username"
-                                        value={this.state.username}
-                                        onChange={ev => this.setState({ username: ev.target.value })}
-                                        className="form-control"
-                                    />
-                                    <br />
-                                    <input
-                                        type="text"
-                                        placeholder="Message"
-                                        className="form-control"
-                                        value={this.state.message}
-                                        onChange={ev => this.setState({ message: ev.target.value })}
-                                        onKeyPress={this._handleKeyPress}
-                                    />
-                                    <br />
-                                    <button
-                                        onClick={this.sendMessage}
-                                        className="btn btn-primary form-control"
-                                        style={{ backgroundColor: '#4F000B' }}
-                                    >
-                                        Spread Some Love
-                                    </button>
+                    <div className="chat">
+                        <div className="card card-chat card-left">
+                            <div className="card-body">
+                                <div className="author">Flo</div>
+                                <div className="message">I am a nice German guy</div>
+                            </div>
+                        </div>
+
+                        <div className="card card-chat card-right">
+                            <div className="card-body">
+                                <div className="author">Hananas</div>
+                                <div className="message">
+                                    I am a nice girl from hawai Lorem ipsum dolor, sit amet consectetur
+                                    adipisicing elit. Totam reprehenderit autem dignissimos
+                                    necessitatibus doloribus sit eos enim voluptas harum, dolor officiis
+                                    repellat laboriosam, ratione est voluptatem dolorem id perferendis
+                                    facilis.
                                 </div>
                             </div>
+                        </div>
+                    </div>
+
+                    <hr />
+                    <hr />
+                    <div className="card">
+                        <div className="card-body">
+                            <div className="card-title text-dark">
+                                <strong>Love Knows NO Boundaries</strong>
+                            </div>
+                            <hr />
+                            <div className="messages">
+                                {this.state.messages.map(message => {
+                                    return (
+                                        <div>
+                                            {message.author}: {message.message}
+                                        </div>
+                                    );
+                                })}
+                            </div>
+                        </div>
+                        <div className="card-footer">
+                            <input
+                                type="text"
+                                placeholder="Username"
+                                value={this.state.username}
+                                onChange={ev => this.setState({ username: ev.target.value })}
+                                className="form-control"
+                            />
+                            <br />
+                            <input
+                                type="text"
+                                placeholder="Message"
+                                className="form-control"
+                                value={this.state.message}
+                                onChange={ev => this.setState({ message: ev.target.value })}
+                                onKeyPress={this._handleKeyPress}
+                            />
+                            <br />
+                            <button
+                                onClick={this.sendMessage}
+                                className="btn btn-primary form-control"
+                                style={{ backgroundColor: '#4F000B' }}
+                            >
+                                Spread Some Love
+                            </button>
                         </div>
                     </div>
                 </div>
