@@ -17,7 +17,7 @@ class Match extends React.Component {
         };
 
         this.searchHandler = this.searchHandler.bind(this);
-        this.namehandler = this.namehandler.bind(this);
+        this.cityHandler = this.cityHandler.bind(this);
         this.doMatch = this.doMatch.bind(this);
     }
     searchHandler(event) {
@@ -26,7 +26,7 @@ class Match extends React.Component {
         });
         console.log(this.state);
     }
-    namehandler(event) {
+    cityHandler(event) {
         this.setState({
             newterm: event.target.value
         });
@@ -41,7 +41,7 @@ class Match extends React.Component {
 
     searchingForr(newterm) {
         return function(x) {
-            return x.name.toLowerCase().includes(newterm.toLowerCase()) || !newterm;
+            return x.city.toLowerCase().includes(newterm.toLowerCase()) || !newterm;
         };
     }
 
@@ -91,7 +91,7 @@ class Match extends React.Component {
                     <div className="Querys">
                         <form>
                             <h1>City</h1>
-                            <input type="text" name="namequery" onChange={this.namehandler} />
+                            <input type="text" name="cityquery" onChange={this.cityHandler} />
                         </form>
                         <form>
                             <h1>Age</h1>

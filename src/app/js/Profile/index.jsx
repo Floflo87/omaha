@@ -54,45 +54,6 @@ class Profile extends Component {
                     placeholder="city"
                     onChange={evt => this._inputChangeHandler('city', evt.target.value)}
                 />
-                {/* <input
-                    type="text"
-                    value={this.state.gender}
-                    placeholder="gender"
-                    onChange={evt => this._inputChangeHandler('gender', evt.target.value)}
-                /> */}
-                {/* <br /> */}
-                {/* <br />
-                <h2>Interested In</h2> */}
-                {/* <label>
-                    <input
-                        type="radio"
-                        value="women"
-                        checked={this.state.preferences === 'women'}
-                        onChange={evt => this._inputChangeHandler('preferences', evt.target.value)}
-                    />
-                    Women
-                </label> */}
-                {/* <br />
-                <label>
-                    <input
-                        type="radio"
-                        value="men"
-                        checked={this.state.preferences === 'men'}
-                        onChange={evt => this._inputChangeHandler('preferences', evt.target.value)}
-                    />
-                    Men
-                </label>
-                <br />
-                <label>
-                    <input
-                        type="radio"
-                        value="both"
-                        checked={this.state.preferences === 'both'}
-                        onChange={evt => this._inputChangeHandler('preferences', evt.target.value)}
-                    />
-                    Both
-                </label>
-                <br /> */}
                 <br />
                 <h2>Keep It Short And Real</h2>
                 <textarea
